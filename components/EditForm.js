@@ -33,23 +33,28 @@ const EditForm = ({ editCloth, clothId, cloth }) => {
   
 
     return (
-        <SafeAreaView>
-            <Text>Title:</Text>
-            <Text>{title}</Text>
+        <SafeAreaView style={globalStyles.container}>
+            <Text style={globalStyles.titleText}>Title:</Text>
+            <Text style={globalStyles.paragraph}>{title}</Text>
 
-            <Text>Description:</Text>
+            <Text style={globalStyles.titleText}>Description:</Text>
             <TextInput
+            style={globalStyles.paragraph}
             value={description}
             onChangeText = {setDescription}
-            ></TextInput>
+            />
 
-             <Text>Quali:</Text>
-             <Text>{quali}</Text>
+             <Text style={globalStyles.titleText}>Quali:</Text>
+             <Text style={globalStyles.paragraph}>{quali}</Text>
 
-      <Text>Price:</Text>
-      <TextInput value={price} onChangeText={setPrice} />
+      <Text style={globalStyles.titleText}>Price:</Text>
+      <TextInput
+      style={globalStyles.paragraph}
+       value={price} 
+       onChangeText={setPrice} 
+       />
 
-      <Button title="Save Changes" onPress={handleUpdate} />
+      <FlatButton text="Save Changes" onPress={handleUpdate} />
         </SafeAreaView>
     )
 }
