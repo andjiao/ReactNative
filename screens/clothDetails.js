@@ -25,12 +25,8 @@ export default function ReviewDetails({route, navigation }) {
         <Text style={globalStyles.paragraph}>
           Price: {JSON.stringify(route.params.price || 'NO-PRICE')}
         </Text>
-        <Text style={globalStyles.paragraph}>
-          Quali: {JSON.stringify(route.params.quali || 'NO-QUALI')}
-        </Text>
-
         <View style={styles.quali}>
-          <Text style={styles.qualiText}>Cloths Qualitiy: </Text>
+          <Text style={styles.qualiText}>Qualitiy: </Text>
           <Text style={globalStyles.paragraph}>
           <Image source={images.qualies[route.params.quali]} style = {styles.qualiIcon}  />
           </Text>

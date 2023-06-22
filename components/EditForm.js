@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import {SafeAreaView, StyleSheet, TextInput, View, Text, Button} from 'react-native';
-
-import { Formik, Field, Form } from 'formik';
+import { Picker } from "@react-native-picker/picker"
 
 
 import { globalStyles } from '../styles/global.js';
@@ -21,6 +20,7 @@ const EditForm = ({ editCloth, cloth }) => {
         title: title,
         description: description,
         price: price,
+        quali: quali,
     };
     console.log("this is the id", cloth.id)
 
@@ -41,11 +41,22 @@ const EditForm = ({ editCloth, cloth }) => {
             value={description}
             onChangeText = {setDescription}
             />
-
             
-
+          
       <Text style={globalStyles.titleText}>Price:</Text>
       <TextInput style={{...globalStyles.input}} value={price} onChangeText={setPrice} />
+
+      <View style={globalStyles.container}>
+      <Picker
+        selectedValue={quali}
+        style={{ height: 50, width: 150 }}
+        onValueChange={(itemValue) => setQuali(itemValue)}
+      >
+        <Picker.Item label="Used" value="used" />
+        <Picker.Item label="Medium" value="medium" />
+        <Picker.Item label="New" value="new" />
+      </Picker>
+    </View>
 
       <Button editCloth ={editCloth} title="Save Changes" onPress={handleUpdate} />
         </SafeAreaView>

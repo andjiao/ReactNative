@@ -1,6 +1,7 @@
 import {SafeAreaView, TextInput, View, Text } from 'react-native';
-import { Picker } from "@react-native-picker/picker"
+
 import React, { useState, useEffect } from 'react';
+import { Picker } from "@react-native-picker/picker"
 
 import * as yup from 'yup';
 import { Formik, Field, Form } from 'formik';
@@ -15,10 +16,8 @@ import FlatButton from '../components/button';
 
 
 const clothSchema = yup.object({
-  title: yup.string()
-    .min(4),
-  description: yup.string()
-   ,
+  title: yup.string().min(3),
+  description: yup.string(),
     price: yup.number(),
     quali: yup.number()
 
@@ -26,7 +25,6 @@ const clothSchema = yup.object({
 
 
 export default function ClothForm ({ addCloth }) {
-
 
   const onSubmitCloth = async ( values ) => {
     const clothCollectionRef = collection(db, 'cloths');
@@ -84,6 +82,7 @@ export default function ClothForm ({ addCloth }) {
               value={String(props.values.price)}
               keyboardType='numeric'
             />
+            
             <Text style={globalStyles.errorText}>{props.touched.price && props.errors.price}</Text>
 
             <View style={globalStyles.container}>

@@ -66,7 +66,6 @@ export default function Home ({ navigation }, props) {
     }
   };
   useEffect(() => {
-    console.log('Fetching cloth list on mount...');
     getClothList();
   }, []);
 
