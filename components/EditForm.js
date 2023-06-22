@@ -38,27 +38,20 @@ const EditForm = ({ editCloth, clothId, cloth }) => {
             <View style ={styles.row}>
             <Text style={globalStyles.titleText}>Title:</Text>
             <Text style={{...globalStyles.paragraph,}}>{title}</Text>
-
             </View>
-            
-
+      
             <Text style={globalStyles.titleText}>Description:</Text>
-            <TextInput
-            style={{...globalStyles.input}}
+            <TextInput style={globalStyles.input}
             value={description}
             onChangeText = {setDescription}
-            ></TextInput>
+            />
 
-            <View style={styles.row}>
-            <Text style={globalStyles.titleText}>Quali:</Text>
-             <Text style={{...globalStyles.paragraph}}>{quali}</Text>
-            </View>
             
 
       <Text style={globalStyles.titleText}>Price:</Text>
       <TextInput style={{...globalStyles.input}} value={price} onChangeText={setPrice} />
 
-      <Button title="Save Changes" onPress={handleUpdate} />
+      <Button editCloth ={editCloth}title="Save Changes" onPress={handleUpdate} />
         </SafeAreaView>
     )
 }

@@ -27,16 +27,7 @@ export default function ReviewDetails({route, navigation }) {
         <Text style={globalStyles.paragraph}>
           Price: {JSON.stringify(route.params.price || 'NO-PRICE')}
         </Text>
-        <View style={styles.rating}>
-          <Text>GameZone rating: </Text>
-          <Text style={globalStyles.paragraph}>
-          Qualitiy: {JSON.stringify(route.params.quali || 'NO-QUALI')}
-          <Image source={images.ratings[route.params.rating]} style={styles.ratingImage}  />
-          </Text>
-
-         
-          
-        </View> 
+    
       </Card>
   
     </SafeAreaView>

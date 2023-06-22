@@ -6,10 +6,11 @@ import { SafeAreaView, StyleSheet, View, Text, TouchableOpacity, FlatList, Modal
   import {
     getDocs,
     collection,
-    deleteDoc,
     updateDoc,
     doc,
   } from "firebase/firestore";
+
+  import { deleteDoc } from "firebase/firestore";
 
 
 import { globalStyles } from '../styles/global';
@@ -73,8 +74,9 @@ export default function Home ({ navigation }, props) {
   // CRUD____________________
 
   const addCloth = (cloth) => {
+    const newCloth = { ...cloth, id:cloth.id };
     setClothList((currentCloths) => {
-      return [cloth, ...currentCloths]
+      return [newCloth, ...currentCloths]
     });
     hideModal()
   };
@@ -110,6 +112,7 @@ export default function Home ({ navigation }, props) {
    
     return (
       <TouchableOpacity
+      key={item.id}
       onPress={() =>
         navigation.navigate('ClothDetails', {
           clothId:item.id,
