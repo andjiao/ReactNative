@@ -13,6 +13,7 @@ import FlatButton from '../components/button';
 
 
 const EditForm = ({ editCloth, clothId, cloth }) => {
+  const [id, setId] = useState(cloth?.id);
   const [title, setTitle] = useState(cloth?.title);
   const [description, setDescription] = useState(cloth?.description);
   const [quali, setQuali] = useState(cloth?.quali);
@@ -21,19 +22,25 @@ const EditForm = ({ editCloth, clothId, cloth }) => {
   
   const handleUpdate = () => {
     const updatedCloth = {
+      id: id,
         title: title,
         description: description,
         quali: quali,
         price: price,
     };
 
-    editCloth(clothId, updatedCloth);
+    editCloth(clothId, updatedCloth)
+
+    
   };
-   
-  
 
     return (
         <SafeAreaView style={globalStyles.container}>
+
+            <View style ={styles.row}>
+            <Text style={globalStyles.titleText}>ID:</Text>
+            <Text style={{...globalStyles.paragraph,}}>{id}</Text>
+            </View>
 
             <View style ={styles.row}>
             <Text style={globalStyles.titleText}>Title:</Text>
@@ -51,7 +58,7 @@ const EditForm = ({ editCloth, clothId, cloth }) => {
       <Text style={globalStyles.titleText}>Price:</Text>
       <TextInput style={{...globalStyles.input}} value={price} onChangeText={setPrice} />
 
-      <Button editCloth ={editCloth}title="Save Changes" onPress={handleUpdate} />
+      <Button editCloth ={editCloth} title="Save Changes" onPress={handleUpdate} />
         </SafeAreaView>
     )
 }

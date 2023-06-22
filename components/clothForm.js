@@ -31,6 +31,7 @@ export default function ClothForm ({ addCloth }) {
   const clothCollectionRef = collection(db, "cloths")
 
   const onSubmitCloth = async ( values ) => {
+    const clothCollectionRef = collection(db, 'cloths');
     try {
       await addDoc(clothCollectionRef, {
         title: values.title,
@@ -53,7 +54,7 @@ export default function ClothForm ({ addCloth }) {
       validationSchema ={clothSchema}
       onSubmit ={(values, actions) =>{
         actions.resetForm();
-        addCloth(values);    
+        onSubmitCloth(values);    
       }}
       >
         {props => (

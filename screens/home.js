@@ -7,6 +7,7 @@ import { SafeAreaView, StyleSheet, View, Text, TouchableOpacity, FlatList, Modal
     getDocs,
     collection,
     updateDoc,
+    addDoc,
     doc,
   } from "firebase/firestore";
 
@@ -73,15 +74,17 @@ export default function Home ({ navigation }, props) {
 
   // CRUD____________________
 
-  const addCloth = (cloth) => {
-    const newCloth = { ...cloth, id:cloth.id };
+  const addCloth = async(cloth) => {
+    const docRef = await addDoc(clothsCollectionRef, cloth);
+    const newCloth = { ...cloth, id: docRef.id };
+
     setClothList((currentCloths) => {
       return [newCloth, ...currentCloths]
     });
     hideModal()
   };
 
-  const updateCloth = async (id, updatedCloth)=>{
+  const editCloth = async (id, updatedCloth)=>{
     const clothDoc = doc(db, "cloths", id)
     await updateDoc(clothDoc, updatedCloth);
 
@@ -129,15 +132,15 @@ export default function Home ({ navigation }, props) {
         
         <View style={{ flexDirection: 'row' }}>
 
-        <TouchableOpacity onPress={() => showEdit(item.id)}>
+        <TouchableOpacity >
             <MaterialIcons 
             name="edit" 
             size={40} 
             color="orange" 
-            onPress={()=> showEdit(item.id)}
+            onPress={() => showEdit(item.id)}
             />
           </TouchableOpacity>
-        
+
           <TouchableOpacity onPress={() => deleteCloth(item.id)}>
             <MaterialIcons name="delete" size={40} color="red" style={{ marginRight: 20 }} />
           </TouchableOpacity>
@@ -179,7 +182,7 @@ export default function Home ({ navigation }, props) {
               color="white"
               onPress={() => hideEdit()} 
             />
-            <EditForm editCloth={updateCloth} clothId={clothId} cloth={getClothById(clothId)}></EditForm>
+            <EditForm editCloth={editCloth} ></EditForm>
           </View>
         </TouchableWithoutFeedback>
       </Modal>
