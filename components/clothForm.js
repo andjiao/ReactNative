@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {SafeAreaView, TextInput, View, Text } from 'react-native';
 
 import * as yup from 'yup';
@@ -77,31 +76,7 @@ export default function ClothForm ({ addCloth }) {
             value={props.values.description}
             />
            <Text style={globalStyles.errorText}>{props.touched.description && props.errors.description}</Text>
-
-           <View> 
-           <Text>Select an option:</Text>
-
-           {({ values }) => (
-        <Form>
-          <View id="my-radio-group">Picked</View>
-          <View role="group" aria-labelledby="my-radio-group">
-            <Text>
-              <Field type="radio" name="picked" value="Used" />
-              One
-            </Text>
-            <Text>
-              <Field type="radio" name="picked" value="Medium" />
-              Two
-            </Text>
-            <View>Picked: {values.quali}</View>
-          </View>
-
-          <button type="submit">Submit</button>
-        </Form>
-           )}
-
-      </View>
-
+     
       <TextInput 
               style={globalStyles.input}
               placeholder='Price for item'

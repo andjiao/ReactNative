@@ -16,6 +16,7 @@ import { globalStyles } from '../styles/global';
 
 import Card from '../components/card';
 import ClothForm from "../components/clothForm.js"
+import EditForm from "../components/EditForm.js"
 
 
 import { db } from "../config/firebase.js";
@@ -25,6 +26,14 @@ export default function Home ({ navigation }, props) {
   const [modalOpen, setModalOpen] = useState(false);
   const [clothList, setClothList] = useState([]);
   const [editMode, setEditMode] = useState(false);
+  const [clothId, setClothId] = useState(null);
+
+  const clothsCollectionRef = collection(db, "cloths");
+  
+  const getClothById = (id) => {
+    return clothList.find((cloth) => cloth.id === id);
+  };
+
 
   const showModal=()=>{
     setModalOpen(true)
@@ -33,8 +42,17 @@ export default function Home ({ navigation }, props) {
     setModalOpen(false)
   }
 
+  const showEdit=( id )=>{
+    setClothId(id)
+    setEditMode(true)
+  }
+  const hideEdit=()=>{
+    setClothId(null)
+    setEditMode(false)
+  }
+
   
-  const clothsCollectionRef = collection(db, "cloths");
+  
   const getClothList = async () => {
     try {
       const data = await getDocs(clothsCollectionRef);
@@ -47,11 +65,12 @@ export default function Home ({ navigation }, props) {
       console.error(err);
     }
   };
-
   useEffect(() => {
     console.log('Fetching cloth list on mount...');
     getClothList();
   }, []);
+
+  // CRUD____________________
 
   const addCloth = (cloth) => {
     setClothList((currentCloths) => {
@@ -59,6 +78,22 @@ export default function Home ({ navigation }, props) {
     });
     hideModal()
   };
+
+  const updateCloth = async (id, updatedCloth)=>{
+    const clothDoc = doc(db, "cloths", id)
+    await updateDoc(clothDoc, updatedCloth);
+
+    setClothList((currentCloths) => {
+      return currentCloths.map((cloth)=>{
+        if(cloth.id === id){
+          return {...cloth, ...updatedCloth}
+        }
+        return cloth
+      })
+    });
+    hideEdit()
+
+  }
 
 
   const deleteCloth = async (id) => {
@@ -91,11 +126,15 @@ export default function Home ({ navigation }, props) {
         
         <View style={{ flexDirection: 'row' }}>
 
-        <TouchableOpacity onPress={() => updateCloth(item.id)}>
-            <MaterialIcons name="edit" size={40} color="orange" style={{ marginRight: 20 }} />
+        <TouchableOpacity onPress={() => showEdit(item.id)}>
+            <MaterialIcons 
+            name="edit" 
+            size={40} 
+            color="orange" 
+            onPress={()=> showEdit(item.id)}
+            />
           </TouchableOpacity>
         
-
           <TouchableOpacity onPress={() => deleteCloth(item.id)}>
             <MaterialIcons name="delete" size={40} color="red" style={{ marginRight: 20 }} />
           </TouchableOpacity>
@@ -108,7 +147,6 @@ export default function Home ({ navigation }, props) {
     )
       
 };
-
 
 
   return (
@@ -124,6 +162,21 @@ export default function Home ({ navigation }, props) {
               onPress={() => hideModal()} 
             />
             <ClothForm addCloth={addCloth}></ClothForm>
+          </View>
+        </TouchableWithoutFeedback>
+      </Modal>
+
+      <Modal visible={editMode} animationType='slide'>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View style={styles.modalContent}>
+            <MaterialIcons 
+              name='close'
+              size={24} 
+              style={{...styles.modalToggle, ...styles.modalClose, backgroundColor:"red"}} 
+              color="white"
+              onPress={() => hideModal()} 
+            />
+            <EditForm editCloth={updateCloth} clothId={clothId} cloth={getClothById(editClothId)}></EditForm>
           </View>
         </TouchableWithoutFeedback>
       </Modal>
