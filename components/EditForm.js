@@ -12,7 +12,7 @@ import { db } from "../config/firebase.js";
 import FlatButton from '../components/button';
 
 
-const EditForm = ({ editCloth, clothId, cloth }) => {
+const EditForm = ({ editCloth, cloth }) => {
   const [id, setId] = useState(cloth?.id);
   const [title, setTitle] = useState(cloth?.title);
   const [description, setDescription] = useState(cloth?.description);
@@ -28,8 +28,9 @@ const EditForm = ({ editCloth, clothId, cloth }) => {
         quali: quali,
         price: price,
     };
+    console.log("this is the id", cloth.id)
 
-    editCloth(clothId, updatedCloth)
+    editCloth(cloth.id, updatedCloth)
 
     
   };

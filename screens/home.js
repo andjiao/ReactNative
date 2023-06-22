@@ -84,7 +84,7 @@ export default function Home ({ navigation }, props) {
     hideModal()
   };
 
-  const editCloth = async (id, updatedCloth)=>{
+  const editCloth = async(id, updatedCloth)=>{
     const clothDoc = doc(db, "cloths", id)
     await updateDoc(clothDoc, updatedCloth);
 
@@ -99,7 +99,6 @@ export default function Home ({ navigation }, props) {
     hideEdit()
 
   }
-
 
   const deleteCloth = async (id) => {
     const clothDoc = doc(db, "cloths", id);
@@ -149,7 +148,6 @@ export default function Home ({ navigation }, props) {
       </Card>
       
     </TouchableOpacity>
-
     )
       
 };
@@ -182,7 +180,7 @@ export default function Home ({ navigation }, props) {
               color="white"
               onPress={() => hideEdit()} 
             />
-            <EditForm editCloth={editCloth} ></EditForm>
+            <EditForm editCloth={editCloth} cloth={getClothById(clothId)} ></EditForm>
           </View>
         </TouchableWithoutFeedback>
       </Modal>
