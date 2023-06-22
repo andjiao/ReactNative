@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {StyleSheet,SafeAreaView, TextInput, View, Text, Button} from 'react-native';
+import {SafeAreaView, StyleSheet, TextInput, View, Text, Button} from 'react-native';
 
 import { Formik, Field, Form } from 'formik';
 
@@ -34,39 +34,31 @@ const EditForm = ({ editCloth, clothId, cloth }) => {
 
     return (
         <SafeAreaView style={globalStyles.container}>
-            <View style={styles.row}>
-            <Text style={globalStyles.titleText}>Title:</Text>
-            <Text style={[globalStyles.paragraph, styles.text]}>{title}</Text>
-            </View>
 
-            <View style={styles.row}>
+            <View style ={styles.row}>
+            <Text style={globalStyles.titleText}>Title:</Text>
+            <Text style={{...globalStyles.paragraph,}}>{title}</Text>
+
+            </View>
+            
+
             <Text style={globalStyles.titleText}>Description:</Text>
             <TextInput
-            style={[globalStyles.input, styles.text]}
-            multiline minHeight={60}
+            style={{...globalStyles.input}}
             value={description}
             onChangeText = {setDescription}
-            />
-            </View>         
+            ></TextInput>
 
-<View style={styles.row}>
-  <Text style={globalStyles.titleText}>Quali:</Text>
-  <Text style={[globalStyles.paragraph, styles.text]}>{quali}</Text>
-</View>
+            <View style={styles.row}>
+            <Text style={globalStyles.titleText}>Quali:</Text>
+             <Text style={{...globalStyles.paragraph}}>{quali}</Text>
+            </View>
+            
 
-<View style ={styles.row}>
-<Text style={globalStyles.titleText}>Price:</Text>
-      <TextInput
-      style={[globalStyles.input, styles.text]}
-       value={price} 
-       onChangeText={setPrice} 
-       />
+      <Text style={globalStyles.titleText}>Price:</Text>
+      <TextInput style={{...globalStyles.input}} value={price} onChangeText={setPrice} />
 
-</View>
-
-      
-
-      <FlatButton text="Save Changes" onPress={handleUpdate} />
+      <Button title="Save Changes" onPress={handleUpdate} />
         </SafeAreaView>
     )
 }
@@ -76,10 +68,7 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       alignItems: 'center',
     },
-    text: {
-        marginLeft: 10, 
-      
-      },
+   
   });
 
 export default EditForm;

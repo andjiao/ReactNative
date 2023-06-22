@@ -5,10 +5,11 @@ export const globalStyles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: '#333',
+    padding: 7,
   },
   paragraph: {
     marginVertical: 8,
-    lineHeight: 20,
+    lineHeight: 10,
   },
   container: {
     flex: 1,
@@ -20,6 +21,7 @@ export const globalStyles = StyleSheet.create({
     padding: 10,
     fontSize: 18,
     borderRadius: 6,
+    marginBottom: 5,
   },
   errorText: {
     color: 'crimson',
