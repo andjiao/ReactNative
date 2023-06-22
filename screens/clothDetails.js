@@ -18,22 +18,23 @@ export default function ReviewDetails({route, navigation }) {
   return (
     <SafeAreaView style={globalStyles.container}>
       <Card>
-        <Text style={globalStyles.titleText}> 
-        {JSON.stringify(route.params.clothId || 'NO-ID')}
-        </Text>
-
-        <Text>
+        <Text style={globalStyles.titleText}>
           {JSON.stringify(route.params.title || 'NO-TITLE')}
         </Text>
         <Text>
-          {JSON.stringify(route.params.description || 'NO-description')}
+          Description: {JSON.stringify(route.params.description || 'NO-description')}
+        </Text>
+        <Text>
+          Price: {JSON.stringify(route.params.price || 'NO-PRICE')}
         </Text>
         <View style={styles.rating}>
           <Text>GameZone rating: </Text>
           <Text>
-          {JSON.stringify(route.params.quali || 'NO-QUALI')}
+          Qualitiy: {JSON.stringify(route.params.quali || 'NO-QUALI')}
           <Image source={images.ratings[route.params.rating]} style={styles.ratingImage}  />
           </Text>
+
+         
           
         </View> 
       </Card>

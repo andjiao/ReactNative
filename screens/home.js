@@ -29,7 +29,7 @@ export default function Home ({ navigation }, props) {
   const [clothId, setClothId] = useState(null);
 
   const clothsCollectionRef = collection(db, "cloths");
-  
+
   const getClothById = (id) => {
     return clothList.find((cloth) => cloth.id === id);
   };
@@ -176,7 +176,7 @@ export default function Home ({ navigation }, props) {
               color="white"
               onPress={() => hideModal()} 
             />
-            <EditForm editCloth={updateCloth} clothId={clothId} cloth={getClothById(editClothId)}></EditForm>
+            <EditForm editCloth={updateCloth} clothId={clothId} cloth={getClothById(clothId)}></EditForm>
           </View>
         </TouchableWithoutFeedback>
       </Modal>

@@ -1,4 +1,5 @@
-import {SafeAreaView, TextInput, View, Text } from 'react-native';
+import React, { useState } from 'react';
+import {SafeAreaView, TextInput, View, Text, Button} from 'react-native';
 
 import { Formik, Field, Form } from 'formik';
 
@@ -12,13 +13,18 @@ import FlatButton from '../components/button';
 
 
 const EditForm = ({ editCloth, clothId, cloth }) => {
-    const [price, setPrice] = useState(cloth.price);
+  const [title, setTitle] = useState(cloth?.title);
+  const [description, setDescription] = useState(cloth?.description);
+  const [quali, setQuali] = useState(cloth?.quali);
+  const [price, setPrice] = useState(cloth?.price);
 
   
   const handleUpdate = () => {
     const updatedCloth = {
+        title: title,
         description: description,
-      price: price,
+        quali: quali,
+        price: price,
     };
 
     editCloth(clothId, updatedCloth);
