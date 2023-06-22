@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {SafeAreaView, TextInput, View, Text, Button} from 'react-native';
+import {StyleSheet,SafeAreaView, TextInput, View, Text, Button} from 'react-native';
 
 import { Formik, Field, Form } from 'formik';
 
@@ -34,29 +34,52 @@ const EditForm = ({ editCloth, clothId, cloth }) => {
 
     return (
         <SafeAreaView style={globalStyles.container}>
+            <View style={styles.row}>
             <Text style={globalStyles.titleText}>Title:</Text>
-            <Text style={globalStyles.paragraph}>{title}</Text>
+            <Text style={[globalStyles.paragraph, styles.text]}>{title}</Text>
+            </View>
 
+            <View style={styles.row}>
             <Text style={globalStyles.titleText}>Description:</Text>
             <TextInput
-            style={globalStyles.paragraph}
+            style={[globalStyles.input, styles.text]}
+            multiline minHeight={60}
             value={description}
             onChangeText = {setDescription}
             />
+            </View>         
 
-             <Text style={globalStyles.titleText}>Quali:</Text>
-             <Text style={globalStyles.paragraph}>{quali}</Text>
+<View style={styles.row}>
+  <Text style={globalStyles.titleText}>Quali:</Text>
+  <Text style={[globalStyles.paragraph, styles.text]}>{quali}</Text>
+</View>
 
-      <Text style={globalStyles.titleText}>Price:</Text>
+<View style ={styles.row}>
+<Text style={globalStyles.titleText}>Price:</Text>
       <TextInput
-      style={globalStyles.paragraph}
+      style={[globalStyles.input, styles.text]}
        value={price} 
        onChangeText={setPrice} 
        />
+
+</View>
+
+      
 
       <FlatButton text="Save Changes" onPress={handleUpdate} />
         </SafeAreaView>
     )
 }
+
+const styles = StyleSheet.create({
+    row: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    text: {
+        marginLeft: 10, 
+      
+      },
+  });
 
 export default EditForm;

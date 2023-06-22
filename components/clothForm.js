@@ -27,7 +27,7 @@ const clothSchema = yup.object({
 
 
 export default function ClothForm ({ addCloth }) {
-
+  
   const clothCollectionRef = collection(db, "cloths")
 
   const onSubmitCloth = async ( values ) => {

@@ -121,7 +121,7 @@ export default function Home ({ navigation }, props) {
       }
     >
       <Card>
-      <View style={{ flexDirection: 'row', aligncloths: 'center', justifyContent: 'space-between' }}>
+      <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
         <Text style={globalStyles.titleText}>{ item.title }</Text>
         
         <View style={{ flexDirection: 'row' }}>
@@ -174,7 +174,7 @@ export default function Home ({ navigation }, props) {
               size={24} 
               style={{...styles.modalToggle, ...styles.modalClose, backgroundColor:"red"}} 
               color="white"
-              onPress={() => hideModal()} 
+              onPress={() => hideEdit()} 
             />
             <EditForm editCloth={updateCloth} clothId={clothId} cloth={getClothById(clothId)}></EditForm>
           </View>
@@ -206,12 +206,19 @@ export default function Home ({ navigation }, props) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 3,
+    flexDirection:"row",
+    alignItems:"center",
+    justifyContent:"center",
+    padding: 20,
+  },
   modalToggle: {
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 10,
     borderWidth: 1,
-    borderColor: '#F4A460',
+    borderColor: '#f2f2f2',
     padding: 10,
     borderRadius: 10,
     alignSelf: 'center',
