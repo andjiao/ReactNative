@@ -4,14 +4,12 @@ import { globalStyles } from '../styles/global';
 import Card from '../components/card';
 
 export default function ReviewDetails({route, navigation }) {
-  
+
   const images = {
-    ratings: {
-      '1': require('../assets/rating-1.png'),
-      '2': require('../assets/rating-2.png'),
-      '3': require('../assets/rating-3.png'),
-      '4': require('../assets/rating-4.png'),
-      '5': require('../assets/rating-5.png'),
+    qualies: {
+      'used': require('../assets/bad.png'),
+      'medium': require('../assets/good2.png'),
+      'new': require('../assets/bedst.png'),
     }
   };
   
@@ -27,6 +25,16 @@ export default function ReviewDetails({route, navigation }) {
         <Text style={globalStyles.paragraph}>
           Price: {JSON.stringify(route.params.price || 'NO-PRICE')}
         </Text>
+        <Text style={globalStyles.paragraph}>
+          Quali: {JSON.stringify(route.params.quali || 'NO-QUALI')}
+        </Text>
+
+        <View style={styles.quali}>
+          <Text style={styles.qualiText}>Cloths Qualitiy: </Text>
+          <Text style={globalStyles.paragraph}>
+          <Image source={images.qualies[route.params.quali]} style = {styles.qualiIcon}  />
+          </Text>
+          </View>
     
       </Card>
   
@@ -36,18 +44,20 @@ export default function ReviewDetails({route, navigation }) {
 }
 
 const styles = StyleSheet.create({
-  rating: {
+  quali: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    alignItems: 'center',
     paddingTop: 16,
     marginTop: 16,
     borderTopWidth: 1,
-    borderTopColor: '#eee',
   },
-  ratingImage: {
-    width: 90, 
-    height: 27,
-    marginLeft: 5,
+  qualiText: {
+    marginRight: 8,
+  },
+  qualiIcon: {
+    width: 40,
+    height: 40,
+      
   },
 });
 

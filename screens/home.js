@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { SafeAreaView, StyleSheet, View, Text, TouchableOpacity, FlatList, Modal,
-  TouchableWithoutFeedback, Keyboard } from 'react-native';
+  TouchableWithoutFeedback, Keyboard, ScrollView} from 'react-native';
   import { MaterialIcons } from '@expo/vector-icons';
 
   import {
@@ -12,6 +12,7 @@ import { SafeAreaView, StyleSheet, View, Text, TouchableOpacity, FlatList, Modal
   } from "firebase/firestore";
 
   import { deleteDoc } from "firebase/firestore";
+  import { db } from "../config/firebase.js";
 
 
 import { globalStyles } from '../styles/global';
@@ -19,9 +20,6 @@ import { globalStyles } from '../styles/global';
 import Card from '../components/card';
 import ClothForm from "../components/clothForm.js"
 import EditForm from "../components/EditForm.js"
-
-
-import { db } from "../config/firebase.js";
 
 
 export default function Home ({ navigation }, props) {
@@ -72,7 +70,6 @@ export default function Home ({ navigation }, props) {
     getClothList();
   }, []);
 
-  // CRUD____________________
 
   const addCloth = async(cloth) => {
     const docRef = await addDoc(clothsCollectionRef, cloth);
@@ -111,7 +108,6 @@ export default function Home ({ navigation }, props) {
 
 
   const itemRendering = ({ item }) => {
-   
     return (
       <TouchableOpacity
       key={item.id}
@@ -195,7 +191,7 @@ export default function Home ({ navigation }, props) {
 
      
     {clothList.length === 0 ? (
-      <Text>Loading...</Text> // Or any loading indicator or message
+      <Text>Loading...</Text> 
     ) : (
       <FlatList
         data={clothList}
@@ -203,7 +199,6 @@ export default function Home ({ navigation }, props) {
         keyExtractor={(item) => item.id}
       />
     )}
-
       </SafeAreaView>
 
   );

@@ -5,11 +5,6 @@ import { Formik, Field, Form } from 'formik';
 
 
 import { globalStyles } from '../styles/global.js';
-import { updateDoc, doc } from "firebase/firestore";
-import { db } from "../config/firebase.js";
-
-
-import FlatButton from '../components/button';
 
 
 const EditForm = ({ editCloth, cloth }) => {
@@ -25,7 +20,6 @@ const EditForm = ({ editCloth, cloth }) => {
       id: id,
         title: title,
         description: description,
-        quali: quali,
         price: price,
     };
     console.log("this is the id", cloth.id)
@@ -37,12 +31,6 @@ const EditForm = ({ editCloth, cloth }) => {
 
     return (
         <SafeAreaView style={globalStyles.container}>
-
-            <View style ={styles.row}>
-            <Text style={globalStyles.titleText}>ID:</Text>
-            <Text style={{...globalStyles.paragraph,}}>{id}</Text>
-            </View>
-
             <View style ={styles.row}>
             <Text style={globalStyles.titleText}>Title:</Text>
             <Text style={{...globalStyles.paragraph,}}>{title}</Text>

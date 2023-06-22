@@ -2,10 +2,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 const Stack = createStackNavigator();
 
 import React from 'react';
-import Header from '../components/header';
 import Home from '../screens/home';
 import ClothDetails from '../screens/clothDetails';
-
 
 
 function HomeStack (){
@@ -19,16 +17,17 @@ function HomeStack (){
             name="ClothDetails"
             component={ClothDetails}
             />
+          
         </Stack.Navigator>
     )
 }
-
-
-
-// home stack navigator screens
-
-
 export default HomeStack;
+
+
+
+
+
+
 
 
 

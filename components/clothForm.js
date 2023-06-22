@@ -1,4 +1,6 @@
 import {SafeAreaView, TextInput, View, Text } from 'react-native';
+import { Picker } from "@react-native-picker/picker"
+import React, { useState, useEffect } from 'react';
 
 import * as yup from 'yup';
 import { Formik, Field, Form } from 'formik';
@@ -6,7 +8,7 @@ import { Formik, Field, Form } from 'formik';
 
 import { globalStyles } from '../styles/global.js';
 import { collection, addDoc, } from "firebase/firestore";
-import { db } from "../config/firebase.js";
+import { db, storage } from "../config/firebase.js";
 
 
 import FlatButton from '../components/button';
@@ -14,21 +16,17 @@ import FlatButton from '../components/button';
 
 const clothSchema = yup.object({
   title: yup.string()
-   
     .min(4),
   description: yup.string()
    ,
-    quali: yup.string()
-    .oneOf(['used', 'medium', 'good'])
-   ,
-    price: yup.number()
+    price: yup.number(),
+    quali: yup.number()
 
 });
 
 
 export default function ClothForm ({ addCloth }) {
-  
-  const clothCollectionRef = collection(db, "cloths")
+
 
   const onSubmitCloth = async ( values ) => {
     const clothCollectionRef = collection(db, 'cloths');
@@ -36,8 +34,8 @@ export default function ClothForm ({ addCloth }) {
       await addDoc(clothCollectionRef, {
         title: values.title,
         description: values. description,
-        quali: values.quali,
-        price:values.price
+        price:values.price,
+        quali:values.quali
 
       }); 
       
@@ -50,7 +48,7 @@ export default function ClothForm ({ addCloth }) {
 
     <SafeAreaView style={globalStyles.container}>
       <Formik
-      initialValues={{title: '', description:'', quali:'', price:0}}
+      initialValues={{title: '', description:'', price:'', quali: 'used'}}
       validationSchema ={clothSchema}
       onSubmit ={(values, actions) =>{
         actions.resetForm();
@@ -88,6 +86,17 @@ export default function ClothForm ({ addCloth }) {
             />
             <Text style={globalStyles.errorText}>{props.touched.price && props.errors.price}</Text>
 
+            <View style={globalStyles.container}>
+      <Picker
+        selectedValue={props.values.quali}
+        style={{ height: 50, width: 150 }}
+        onValueChange={(itemValue) => props.setFieldValue('quali', itemValue)}
+      >
+        <Picker.Item label="Used" value="used" />
+        <Picker.Item label="Medium" value="medium" />
+        <Picker.Item label="New" value="new" />
+      </Picker>
+    </View>
             <FlatButton addCloth={addCloth}  onPress={() => onSubmitCloth(props.values)} text='submit' />
 
 
